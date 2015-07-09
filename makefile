@@ -1,21 +1,28 @@
 RM := rm -rf
 
-# All of the sources participating in the build are defined here
-C_SRCS += \
-./convert_soy_data.c 
 
 OBJS += \
-./convert_soy_data.o 
+./convert_soy_data.o
+
+OBJS2 += \
+./barebones_convert_soy_data.o
 
 
 # All Target
-all: ConvertSoyData
+all: ConvertSoyData BarebonesConvertSoyData
 
 # Tool invocations
 ConvertSoyData: $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross GCC Linker'
 	gcc `xml2-config --libs` -o "ConvertSoyData" $(OBJS)
+	@echo 'Finished building target: $@'
+	@echo ' '
+
+BarebonesConvertSoyData: $(OBJS)
+	@echo 'Building target: $@'
+	@echo 'Invoking: Cross GCC Linker'
+	gcc `xml2-config --libs` -o "BarebonesConvertSoyData" $(OBJS2)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -27,7 +34,7 @@ ConvertSoyData: $(OBJS)
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS) ConvertSoyData
+	-$(RM) $(OBJS) $(OBJS2) ConvertSoyData BarebonesConvertSoyData
 	-@echo ' '
 
 .PHONY: all clean dependents

@@ -22,7 +22,7 @@ addObservationElement(xmlTextWriterPtr writer, char *row)
     double Wind;
     double Precip;
 
-    int rc; // return code
+    int rc; /* return code */
 
 
     sscanf(row,"%d %d %d %lf %lf %lf %lf %lf \n",
@@ -140,7 +140,7 @@ addObservationElement(xmlTextWriterPtr writer, char *row)
  * by uri. */
 void convertToXML(FILE *f_h, const char* uri)
 {
-    int rc; // return code
+    int rc; /* return code */
     xmlTextWriterPtr writer;
     char row[MAX_LINE_SIZE];
 
@@ -168,13 +168,13 @@ void convertToXML(FILE *f_h, const char* uri)
     }
 
 
+    /* For each row of the input file, add an "observation" element inside the
+     * "data-set" element. */
     while (  fgets(row, MAX_LINE_SIZE, f_h)  ) {
-
         addObservationElement(writer, row);
-
     }
 
-    rc = xmlTextWriterEndDocument(writer);
+    rc = xmlTextWriterEndDocument(writer); /* Automatically closes all open elements. */
     if (rc < 0) {
         printf("convertToXML: Error at xmlTextWriterEndDocument\n");
         return;
