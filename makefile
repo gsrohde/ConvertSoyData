@@ -37,10 +37,4 @@ clean:
 	-$(RM) $(OBJS) $(OBJS2) ConvertSoyData BarebonesConvertSoyData
 	-@echo ' '
 
-.PHONY: all clean dependents
-.SECONDARY:
-
--include ../makefile.targets
-
-test:
-	xml2-config --cflags
+.PHONY: all clean
